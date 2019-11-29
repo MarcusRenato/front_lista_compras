@@ -199,7 +199,12 @@ function details(id) {
             $("#nameLits").html("<h3>" + response.data[0].name + " </h3>");
             $("#categoryList").html("Categoria: " + response.data[0].category);
             $("#createdAtList").html(
-                "Data de criação: " + response.data[0].created_at
+                "Data de criação: " +
+                response.data[0].created_at
+                .substring(0, 10)
+                .split("-")
+                .reverse()
+                .join("/")
             );
             $("#id_list").val(response.data[0].id);
         }
