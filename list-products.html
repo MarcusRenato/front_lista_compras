@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de compras</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2c3e50;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Lista de compras</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="msg"></div>
+
+        <div class="row justify-content-between">
+            <button type="button" class="btn btn-success my-2" data-target="#modalAddProduct" data-toggle="modal">Adicionar
+                novo produto</button>
+            <div class="form-row my-2">
+                <div class="col-9">
+                    <input type="search" name="search" id="search" class="form-control" placeholder="Busque pelo nome do produto">
+                </div>
+
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary" onclick="searchProduct()">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="list-product-details">
+            <div id="info-list">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td id="nameLits"></td>
+                        </tr>
+                        <tr>
+                            <td id="categoryList"></td>
+                        </tr>
+                        <tr>
+                            <td id="createdAtList"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="editProduct">
+            <div class="row justify-content-center">
+                <div class="col-12 border">
+                    <hr>
+                    <h4 class="text-center">Editar informações do produto </h4>
+                    <form class="form-group" id="form-product-edit" enctype="multipart/form-data" method="POST">
+                        <input type="hidden" name="id_product" id="id_product">
+
+                        <div class="form-group">
+                            <label for="nameProduct">Nome do produto</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descriptionProduct">Descrição</label>
+                            <input type="text" name="description" id="description" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceProduct">Preço</label>
+                            <input type="text" name="price" id="price" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Atualizar informações</button>
+                </div>
+                </form>
+                <hr>
+            </div>
+        </div>
+
+        <div id="products">
+            <h2 class="text-center">Produtos</h2>
+            <table class="table table-hover table-bordered text-center" id="product-table">
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="product-search">
+            <h2 class="text-center">Resultado de busca</h2>
+            <table class="table table-hover table-bordered text-center" id="product-table-search">
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary" onclick="reload()">Voltar a lista de produtos</button>
+        </div>
+    </div>
+
+    <div id="detailProduct">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4" id="image-product"></div>
+                    <div class="col-8" id="infos-product"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Formulário de adição -->
+    <div class="modal fade" id="modalAddProduct" tabindex="-1" role="dialog" aria-labelledby="#modalAddProduct" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAddProduct">Adicionar informações do produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-group" id="form-product" enctype="multipart/form-data" method="POST">
+                    <input type="hidden" name="id_list" id="id_list">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nameProduct">Nome do produto</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descriptionProduct">Descrição</label>
+                            <input type="text" name="description" id="description" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceProduct">Preço</label>
+                            <input type="text" name="price" id="price" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageProduct">Imagem</label>
+                            <input type="file" name="image" id="image" class="form-control-file">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Adicionar
+                            Produto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
